@@ -1,21 +1,41 @@
 package br.com.etechoracio.ingressos.entity;
 
+import br.com.etechoracio.ingressos.enums.ClassificacaoIndicativaEnum;
+import br.com.etechoracio.ingressos.enums.SimNaoEnum;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Sala {
-    private Long id;
-    private String nome;
-    private double preco;
-    private LocalDateTime dataExclusao;
 
+    @Entity
+    @Table(name = "TBL_SALA")
+    public class Sala {
 
-}
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "ID_SALA")
+        private Long id;
+
+        @Column(name = "TX_NOME")
+        private String nome;
+
+        @Column(name = "NR_PRECO")
+        private Double preco;
+
+        @Column(name = "DT_EXCLUSAO")
+        private LocalDateTime dataExclusao;
+
+        public Sala (long id, String nome) {
+        this.id = id;
+        this.nome = nome;
+
+    }
+    }
+
