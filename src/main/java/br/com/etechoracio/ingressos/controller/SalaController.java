@@ -1,8 +1,10 @@
 package br.com.etechoracio.ingressos.controller;
 
+import br.com.etechoracio.ingressos.entity.Filme;
 import br.com.etechoracio.ingressos.entity.Sala;
 import br.com.etechoracio.ingressos.repository.SalaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,5 +30,10 @@ public class SalaController {
         if(sala.isPresent())
             return ResponseEntity.ok(sala.get());
         return ResponseEntity.notFound().build();
+    }
+    @PostMapping
+    public ResponseEntity<Sala> cadastrar(@RequestBody Sala sala){
+        sala = salaRepository.save(sala);
+        return ResponseEntity.status(HttpStatus.CREATED).body(sala);
     }
 }
